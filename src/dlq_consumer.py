@@ -6,9 +6,6 @@ sys.stdout.reconfigure(encoding="utf-8", line_buffering=True)
 from kafka import KafkaConsumer
 
 
-# -----------------------------
-# Kafka DLQ Consumer
-# -----------------------------
 consumer = KafkaConsumer(
     "orders.DLQ",
     bootstrap_servers="localhost:9092",
@@ -19,9 +16,6 @@ consumer = KafkaConsumer(
 )
 
 
-# -----------------------------
-# Start DLQ consumer
-# -----------------------------
 print("DLQ Consumer started...")
 print("Waiting for failed orders...\n")
 
