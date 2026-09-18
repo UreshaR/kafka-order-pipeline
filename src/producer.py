@@ -7,18 +7,11 @@ from kafka import KafkaProducer
 from fastavro import parse_schema, schemaless_writer
 
 
-# -----------------------------
-# Load Avro schema
-# -----------------------------
 with open("schemas/order.avsc", "r") as file:
     schema = json.load(file)
 
 parsed_schema = parse_schema(schema)
 
-
-# -----------------------------
-# Avro serialization function
-# -----------------------------
 def serialize_order(order):
     bytes_writer = BytesIO()
 
@@ -31,17 +24,10 @@ def serialize_order(order):
     return bytes_writer.getvalue()
 
 
-# -----------------------------
-# Create Kafka producer
-# -----------------------------
 producer = KafkaProducer(
     bootstrap_servers="localhost:9092"
 )
 
-
-# -----------------------------
-# Generate and send orders
-# -----------------------------
 products = [
     "Laptop",
     "Phone",
@@ -54,9 +40,7 @@ products = [
 try:
     order_number = 1001
 
-    # -----------------------------
-    # Continuously send random orders
-    # -----------------------------
+  
     while True:
 
         order = {
@@ -78,7 +62,7 @@ try:
             f"Sent order: "
             f"{order['orderId']} | "
             f"{order['product']} | "
-            f"${order['price']:.2f}"
+            f"{order['price']:.2f}"
         )
 
         order_number += 1
